@@ -305,16 +305,19 @@ def main():
 			display_everything()
 
 			# Write data to Dashboard
-			aio.send_data(temp_feed.key, comp_temp)
-			aio.send_data(humi_feed.key, humid_reading)
-			aio.send_data(light_feed.key, light_reading)
-			aio.send_data(press_feed.key, press_reading)
-			aio.send_data(oxy_feed.key, oxide_reading)
-			aio.send_data(reduced_feed.key, reduc_reading)
-			aio.send_data(nh3_feed.key, nh3_reading)
-			aio.send_data(pm1_feed.key, pm1m_reading)
-			aio.send_data(pm10_feed.key, pm10m_reading)
-			aio.send_data(pm25_feed.key, pm25m_reading)
+			try:
+				aio.send_data(temp_feed.key, comp_temp)
+				aio.send_data(humi_feed.key, humid_reading)
+				aio.send_data(light_feed.key, light_reading)
+				aio.send_data(press_feed.key, press_reading)
+				aio.send_data(oxy_feed.key, oxide_reading)
+				aio.send_data(reduced_feed.key, reduc_reading)
+				aio.send_data(nh3_feed.key, nh3_reading)
+				aio.send_data(pm1_feed.key, pm1m_reading)
+				aio.send_data(pm10_feed.key, pm10m_reading)
+				aio.send_data(pm25_feed.key, pm25m_reading)
+			execpt RequestError:
+				pass
 
 			# wait a while
 			sleep(300)
