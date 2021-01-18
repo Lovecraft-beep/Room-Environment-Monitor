@@ -6,6 +6,7 @@ print("*  2021 - Lockdown 3  *")
 print("* Enviro+ & PM Sensor *")
 print("*                     *")
 print("***********************")
+# Code comes from all over the shop
 
 # setup imports
 from Adafruit_IO import Client, RequestError, Feed
@@ -316,7 +317,7 @@ def main():
 				aio.send_data(pm1_feed.key, pm1m_reading)
 				aio.send_data(pm10_feed.key, pm10m_reading)
 				aio.send_data(pm25_feed.key, pm25m_reading)
-			execpt RequestError:
+			except RequestError:
 				pass
 
 			# wait a while
