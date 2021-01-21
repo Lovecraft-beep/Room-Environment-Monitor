@@ -197,6 +197,40 @@ palette = [(0, 0, 255),           # Dangerously Low
 
 values = {}
 
+# Cycle the sensors once to stabalise readings
+cpu_temp = get_cpu_temperature()
+
+	# Smooth out with some averaging to decrease jitter
+	cpu_temps = cpu_temps[1:] + [cpu_temp]
+	avg_cpu_temp = sum(cpu_temps) / float(len(cpu_temps))
+	raw_temp = bme280.get_temperature()
+	comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / factor)
+
+	# Pressures
+	press_reading = bme280.get_pressure()
+
+	# Humidity
+	humid_reading = bme280.get_humidity()
+
+	# Light meter
+	light_reading = ltr559.get_lux()
+
+	# Gas Sensor
+	data = gas.read_all()
+	oxide_reading = data.oxidising / 1000
+	reduc_reading = data.reducing / 1000
+	nh3_reading = data.nh3 / 1000
+
+	# PM Sensor
+	try:
+		data = pms5003.read()
+	except pmsReadTimeoutError:
+		logging.warning("Failed to read PMS5003")
+			else:
+		pm1m_reading = float(data.pm_ug_per_m3(1.0))
+		pm10m_reading = float(data.pm_ug_per_m3(10))
+		pm25m_reading = float(data.pm_ug_per_m3(2.5))
+
 # Get the temperature of the CPU for compensation
 def get_cpu_temperature():
 	with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
