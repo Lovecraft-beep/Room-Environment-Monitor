@@ -3,7 +3,7 @@ print("***********************")
 print("* Environment Monitor *")
 print("*                     *")
 print("*  2021 - Lockdown 3  *")
-print("* Enviro+ & PM Sensor *")
+print("*       Enviro        *")
 print("*                     *")
 print("***********************")
 # Code comes from all over the shop
