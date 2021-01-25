@@ -13,6 +13,8 @@ from Adafruit_IO import Client, RequestError, Feed
 
 from time import sleep
 
+import os
+
 try:
 	from smbus2 import SMBus
 except ImportError:
@@ -352,7 +354,7 @@ def main():
 				aio.send_data(pm10_feed.key, pm10m_reading)
 				aio.send_data(pm25_feed.key, pm25m_reading)
 			except RequestError:
-				pass
+				os.system("sudo reboot")
 
 			# wait a while
 			sleep(300)
