@@ -12,6 +12,7 @@ print("***********************")
 from Adafruit_IO import Client, RequestError, Feed
 
 from time import sleep
+import os
 
 try:
 	from smbus2 import SMBus
@@ -246,7 +247,7 @@ def main():
 				aio.send_data(press_feed.key, press_reading)
 
 			except RequestError:
-				pass
+				os.system("sudo reboot")
 
 			# wait a while
 			sleep(300)
