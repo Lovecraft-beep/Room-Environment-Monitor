@@ -246,7 +246,7 @@ def main():
 				aio.send_data(light_feed.key, light_reading)
 				aio.send_data(press_feed.key, press_reading)
 
-			except RequestError:
+			except:
 				os.system("sudo reboot")
 
 			# wait a while
